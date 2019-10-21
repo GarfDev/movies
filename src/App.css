@@ -45,3 +45,14 @@
 .ReactModal__Overlay--before-close{
     opacity: 0;
 }
+
+.ReactModal__Content {
+  padding: 0px !important;
+}
+
+.html5-video-player{
+  width: 99%;
+  outline: none;
+  border-color: transparent !important;
+  background-color: transparent !important;
+}

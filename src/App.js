@@ -248,8 +248,8 @@ function App() {
       >
         Get More
       </button>
-        <ReactModal closeTimeoutMS={2000} isOpen={modalOpen} onRequestClose={() => setModalOpen(false)}>
-          {(modalOpen === true) ? <YouTube video={`${modalTrailerId}`} autoplay width="100%" height="100%"/> : ""}
+        <ReactModal style={{border:'null'}} closeTimeoutMS={2000} isOpen={modalOpen} onRequestClose={() => setModalOpen(false)}>
+          {(modalOpen === true) ? <YouTube video={`${modalTrailerId}`} autoplay width="100%" height="99%"/> : ""}
         </ReactModal>
     </div>
   );
