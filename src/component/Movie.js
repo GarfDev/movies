@@ -45,7 +45,8 @@ export default function Movie(props) {
           return (<li key={g + i}>{g}</li>)
           })}
         </ul>
-        <button type="button" className="btn btn-primary btn-lg">
+        <button type="button" className="btn btn-primary btn-lg" onClick={() => {
+          props.handelModal(props.id)}}>
           View Trailer
         </button>
       </div>

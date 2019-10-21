@@ -4,8 +4,13 @@ import "./App.css";
 import Movie from "./component/Movie";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
+import ReactModal from 'react-modal';
+import YouTube from '@u-wave/react-youtube';
 
 function App() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTrailerId, setModalTrailerId] = useState("");
+
   const [film, getFilm] = useState([]);
   const [genre, getGenre] = useState([]);
   const [allMovie, getAllMovie] = useState([]);
@@ -20,6 +25,8 @@ function App() {
     getFilm(newMovieData);
     getAllMovie(newMovieData);
   };
+
+
   const getGenres = async () => {
     const url =
       "https://api.themoviedb.org/3/genre/movie/list?api_key=4c5b4a5e627748117d4b24082672a9b4&language=en-US";
@@ -31,6 +38,18 @@ function App() {
     getData();
     getGenres();
   }, []);
+
+  const handelModal = (id) => {
+    getTrailer(id)
+    console.log(modalTrailerId)
+    setModalOpen(true)
+    }
+
+  const getTrailer = async (id) => {
+      const response  = await fetch(`http://api.themoviedb.org/3/movie/${id}/videos?api_key=a3bab0e1a8803be8f21fc84e04666349`)
+      const data = await response.json()
+      setModalTrailerId(data.results[0].key)
+  }
 
   const whatGenre = id => {
     return genre.find(g => {
@@ -200,6 +219,8 @@ function App() {
             {film.map((movie, i) => {
               return (
                 <Movie
+                  handelModal = {handelModal}
+                  id = {movie.id}
                   key={movie.title + i}
                   imgURL={movie.poster_path}
                   title={movie.title}
@@ -227,6 +248,9 @@ function App() {
       >
         Get More
       </button>
+        <ReactModal closeTimeoutMS={2000} isOpen={modalOpen} onRequestClose={() => setModalOpen(false)}>
+          {(modalOpen === true) ? <YouTube video={`${modalTrailerId}`} autoplay width="100%" height="100%"/> : ""}
+        </ReactModal>
     </div>
   );
 }
