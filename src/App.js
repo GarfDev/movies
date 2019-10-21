@@ -46,7 +46,7 @@ function App() {
     }
 
   const getTrailer = async (id) => {
-      const response  = await fetch(`http://api.themoviedb.org/3/movie/${id}/videos?api_key=a3bab0e1a8803be8f21fc84e04666349`)
+      const response  = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=a3bab0e1a8803be8f21fc84e04666349`)
       const data = await response.json()
       setModalTrailerId(data.results[0].key)
   }
